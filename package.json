@@ -1,0 +1,11 @@
+{
+  "name": "sahiyshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/dilshod1d/sahiyshop.git",
+  "author": "Akhmaddev <alraqamuz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tailwind": "^4.0.0"
+  }
+}
