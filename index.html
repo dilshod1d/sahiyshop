@@ -26,6 +26,10 @@
         font-size: 16px;
         margin: 10px 2px;
         cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .product-card button.added {
+        background-color: #008cba; /* Blue */
       }
     </style>
   </head>
@@ -37,13 +41,16 @@
       <button id="add-to-cart">Add to Cart</button>
     </div>
     <script type="text/javascript">
-      document
-        .getElementById("add-to-cart")
-        .addEventListener("click", function () {
-          const data = JSON.stringify({ productId: "product1" });
-          Telegram.WebApp.sendData(data);
+      const addToCartButton = document.getElementById("add-to-cart");
+      addToCartButton.addEventListener("click", function () {
+        const data = JSON.stringify({ productId: "product1" });
+        Telegram.WebApp.sendData(data);
+        addToCartButton.classList.add("added");
+        setTimeout(function () {
+          addToCartButton.classList.remove("added");
           Telegram.WebApp.close();
-        });
+        }, 500);
+      });
 
       Telegram.WebApp.ready();
     </script>
