@@ -1,697 +1,1324 @@
-<script
-  src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-  defer
-></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product listing</title>
 
-<div x-data="{ cartOpen: false , isOpen: false }" class="bg-white">
-  <header>
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
-        <div class="hidden w-full text-gray-600 md:flex md:items-center">
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M16.2721 10.2721C16.2721 12.4813 14.4813 14.2721 12.2721 14.2721C10.063 14.2721 8.27214 12.4813 8.27214 10.2721C8.27214 8.06298 10.063 6.27212 12.2721 6.27212C14.4813 6.27212 16.2721 8.06298 16.2721 10.2721ZM14.2721 10.2721C14.2721 11.3767 13.3767 12.2721 12.2721 12.2721C11.1676 12.2721 10.2721 11.3767 10.2721 10.2721C10.2721 9.16755 11.1676 8.27212 12.2721 8.27212C13.3767 8.27212 14.2721 9.16755 14.2721 10.2721Z"
-              fill="currentColor"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M5.79417 16.5183C2.19424 13.0909 2.05438 7.39409 5.48178 3.79417C8.90918 0.194243 14.6059 0.054383 18.2059 3.48178C21.8058 6.90918 21.9457 12.6059 18.5183 16.2059L12.3124 22.7241L5.79417 16.5183ZM17.0698 14.8268L12.243 19.8965L7.17324 15.0698C4.3733 12.404 4.26452 7.97318 6.93028 5.17324C9.59603 2.3733 14.0268 2.26452 16.8268 4.93028C19.6267 7.59603 19.7355 12.0268 17.0698 14.8268Z"
-              fill="currentColor"
-            />
-          </svg>
-          <span class="mx-1 text-sm">NY</span>
-        </div>
-        <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
-          Brand
-        </div>
-        <div class="flex items-center justify-end w-full">
-          <button
-            @click="cartOpen = !cartOpen"
-            class="text-gray-600 focus:outline-none mx-4 sm:mx-0"
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@200;300;400;500;600;700;800&family=Poppins&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="style.css" rel="stylesheet" />
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <div class="navbar">
+      <section class="p-40 header-container">
+        <header>
+          <div class="logo-contaier">
+            <img src="../images/sevvey_logo.svg" width="110" height="66" />
+          </div>
+          <div class="login-container">
+            <a href="#">Login</a>
+            <span>or</span>
+            <a href="#">Signup</a>
+          </div>
+          <div class="notification">
+            <a href="#">
+              <img
+                width="20"
+                height="20"
+                src="https://s3.ap-south-1.amazonaws.com/static-src-files/app_images/bell.svg"
+              />
+            </a>
+            <span>20</span>
+          </div>
+        </header>
+      </section>
+      <section class="p-40 menu-container" id="myHeader">
+        <nav>
+          <ul>
+            <li>
+              <a href="/news" class="has dropdown-toggle">Home</a>
+            </li>
+
+            <li>
+              <a class="has" href="/news/category/daily-news"> Daily News </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/business"> Business </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/his-her"> His &amp; Her </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/hotpicks"> HotPicks </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/spellbound"> Spellbound </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/out-of-box"> Out of Box </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/hugs-kisses">
+                Hugs &amp; Kisses
+              </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/quiz"> Quiz </a>
+            </li>
+            <li>
+              <a class="has" href="/news/category/misc"> Misc </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="group">
+          <div class="social-icon-container">
+            <ul class="social-share-icons vertical">
+              <li>
+                <a href="" class="facebook"></a>
+              </li>
+              <li>
+                <a href="" class="twitter"></a>
+              </li>
+              <li>
+                <a href="" class="pinterest"></a>
+              </li>
+              <li>
+                <a href="" class="whatsapp mobile"></a>
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="cart">
+            <ul>
+              <li>
+                <a href="#">cart</a>
+              </li>
+            </ul>
+          </div> -->
+
+          <div
+            class="cart"
+            onmouseover="showCartItems()"
+            onmouseout="hideCartItems()"
           >
             <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              ></path>
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                  stroke="#9b6a6c"
+                  stroke-width="1.5"
+                ></path>
+                <path
+                  opacity="0.5"
+                  d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                  stroke="#9b6a6c"
+                  stroke-width="1.5"
+                ></path>
+                <path
+                  d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                  stroke="#9b6a6c"
+                  stroke-width="1.5"
+                ></path>
+              </g>
             </svg>
-          </button>
 
-          <div class="flex sm:hidden">
-            <button
-              @click="isOpen = !isOpen"
-              type="button"
-              class="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500"
-              aria-label="toggle menu"
-            >
-              <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
-                <path
-                  fill-rule="evenodd"
-                  d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                ></path>
-              </svg>
-            </button>
+            <span>23</span>
+            <div class="cart-items">
+              <ul>
+                <!-- Product items will be dynamically added here -->
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <nav
-        :class="isOpen ? '' : 'hidden'"
-        class="sm:flex sm:justify-center sm:items-center mt-4"
-      >
-        <div class="flex flex-col sm:flex-row">
-          <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#"
-            >Home</a
-          >
-          <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#"
-            >Shop</a
-          >
-          <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#"
-            >Categories</a
-          >
-          <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#"
-            >Contact</a
-          >
-          <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#"
-            >About</a
-          >
+      </section>
+    </div>
+    <div class="main">
+      <div class="headsection">
+        <div class="breadcrumb">
+          <p>Home / Shop / Product Listing</p>
         </div>
-      </nav>
-      <div class="relative mt-6 max-w-lg mx-auto">
-        <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-          <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+        <div class="headline">
+          <h1>Discover the World of Handicrafts</h1>
+          <p>Find Exquisite Handmade Treasures for Your Home and Lifestyle</p>
+        </div>
+        <div class="product-counter">
+          <p id="product-count">Total products: 239</p>
+        </div>
+      </div>
+      <div class="main-container">
+        <div class="category-box">
+          <h2>Handicraft Categories</h2>
+          <div class="checkbox-container">
+            <div class="checkbox-item">
+              <input type="checkbox" id="ethnic-handcraft" name="category" />
+              <label for="ethnic-handcraft">Ethnic Handcrafts</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="ceramic" name="category" />
+              <label for="ceramic">Ceramic and Glass</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="paper" name="category" />
+              <label for="paper">Paper Mache Crafts</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="eco" name="category" />
+              <label for="eco">Eco Friendly Handicraft</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="decor" name="category" />
+              <label for="decor">Home Decor</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="delight" name="category" />
+              <label for="delight">Home Decor Delights</label>
+            </div>
+          </div>
+
+          <h2>Filter</h2>
+          <div class="filter-container">
+            <input
+              type="text"
+              id="search"
+              name="search"
+              placeholder="Search Handicrafts"
             />
-          </svg>
-        </span>
+            <select id="sort" name="sort">
+              <option value="popularity">Popularity</option>
+              <option value="newest">Newest</option>
+              <option value="priceLow">Price: Low to High</option>
+              <option value="priceHigh">Price: High to Low</option>
+            </select>
+            <div class="price-range">
+              <label for="price-min">Min Price</label>
+              <input type="number" id="price-min" name="price-min" min="0" />
+              <label for="price-max">Max Price</label>
+              <input type="number" id="price-max" name="price-max" min="0" />
+            </div>
 
-        <input
-          class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-          type="text"
-          placeholder="Search"
-        />
-      </div>
-    </div>
-  </header>
-  <div
-    :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'"
-    class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300"
-  >
-    <div class="flex items-center justify-between">
-      <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>
-      <button
-        @click="cartOpen = !cartOpen"
-        class="text-gray-600 focus:outline-none"
-      >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-    </div>
-    <hr class="my-3" />
-    <div class="flex justify-between mt-6">
-      <div class="flex">
-        <img
-          class="h-20 w-20 object-cover rounded"
-          src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-          alt=""
-        />
-        <div class="mx-3">
-          <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
-          <div class="flex items-center mt-2">
-            <button
-              class="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </button>
-            <span class="text-gray-700 mx-2">2</span>
-            <button
-              class="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </button>
+            <button type="submit" id="apply-filters">Apply Filters</button>
           </div>
         </div>
-      </div>
-      <span class="text-gray-600">20$</span>
-    </div>
-    <div class="flex justify-between mt-6">
-      <div class="flex">
-        <img
-          class="h-20 w-20 object-cover rounded"
-          src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-          alt=""
-        />
-        <div class="mx-3">
-          <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
-          <div class="flex items-center mt-2">
-            <button
-              class="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </button>
-            <span class="text-gray-700 mx-2">2</span>
-            <button
-              class="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <span class="text-gray-600">20$</span>
-    </div>
-    <div class="flex justify-between mt-6">
-      <div class="flex">
-        <img
-          class="h-20 w-20 object-cover rounded"
-          src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-          alt=""
-        />
-        <div class="mx-3">
-          <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
-          <div class="flex items-center mt-2">
-            <button
-              class="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </button>
-            <span class="text-gray-700 mx-2">2</span>
-            <button
-              class="text-gray-500 focus:outline-none focus:text-gray-600"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <span class="text-gray-600">20$</span>
-    </div>
-    <div class="mt-8">
-      <form class="flex items-center justify-center">
-        <input
-          class="form-input w-48"
-          type="text"
-          placeholder="Add promocode"
-        />
-        <button
-          class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-        >
-          <span>Apply</span>
-        </button>
-      </form>
-    </div>
-    <a
-      class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-    >
-      <span>Chechout</span>
-      <svg
-        class="h-5 w-5 mx-2"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-      </svg>
-    </a>
-  </div>
-  <main class="my-8">
-    <div class="container mx-auto px-6">
-      <div
-        class="h-64 rounded-md overflow-hidden bg-cover bg-center"
-        style="
-          background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144');
-        "
-      >
-        <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
-          <div class="px-10 max-w-xl">
-            <h2 class="text-2xl text-white font-semibold">Sport Shoes</h2>
-            <p class="mt-2 text-gray-400">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore
-              facere provident molestias ipsam sint voluptatum pariatur.
-            </p>
-            <button
-              class="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-            >
-              <span>Shop Now</span>
-              <svg
-                class="h-5 w-5 mx-2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="md:flex mt-8 md:-mx-4">
-        <div
-          class="w-full h-64 md:mx-4 rounded-md overflow-hidden bg-cover bg-center md:w-1/2"
-          style="
-            background-image: url('https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80');
-          "
-        >
-          <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
-            <div class="px-10 max-w-xl">
-              <h2 class="text-2xl text-white font-semibold">Back Pack</h2>
-              <p class="mt-2 text-gray-400">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tempore facere provident molestias ipsam sint voluptatum
-                pariatur.
-              </p>
-              <button
-                class="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline focus:outline-none"
-              >
-                <span>Shop Now</span>
-                <svg
-                  class="h-5 w-5 mx-2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div
-          class="w-full h-64 mt-8 md:mx-4 rounded-md overflow-hidden bg-cover bg-center md:mt-0 md:w-1/2"
-          style="
-            background-image: url('https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
-          "
-        >
-          <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
-            <div class="px-10 max-w-xl">
-              <h2 class="text-2xl text-white font-semibold">Games</h2>
-              <p class="mt-2 text-gray-400">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tempore facere provident molestias ipsam sint voluptatum
-                pariatur.
-              </p>
-              <button
-                class="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline focus:outline-none"
-              >
-                <span>Shop Now</span>
-                <svg
-                  class="h-5 w-5 mx-2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mt-16">
-        <h3 class="text-gray-600 text-2xl font-medium">Fashions</h3>
-        <div
-          class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6"
-        >
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1563170351-be82bc888aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=376&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">Chanel</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">Man Mix</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1532667449560-72a95c8d381b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">Classic watch</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1590664863685-a99ef05e9f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=345&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">woman mix</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mt-16">
-        <h3 class="text-gray-600 text-2xl font-medium">Fashions</h3>
-        <div
-          class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6"
-        >
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1563170351-be82bc888aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=376&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">Chanel</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">Man Mix</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1532667449560-72a95c8d381b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">Classic watch</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-          <div
-            class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-          >
-            <div
-              class="flex items-end justify-end h-56 w-full bg-cover"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1590664863685-a99ef05e9f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=345&q=80');
-              "
-            >
-              <button
-                class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-              >
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="px-5 py-3">
-              <h3 class="text-gray-700 uppercase">woman mix</h3>
-              <span class="text-gray-500 mt-2">$12</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
 
-  <footer class="bg-gray-200">
-    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-      <a href="#" class="text-xl font-bold text-gray-500 hover:text-gray-400"
-        >Brand</a
-      >
-      <p class="py-2 text-gray-500 sm:py-0">All rights reserved</p>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/Handcrafted_Home_decor.jpeg"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="short-description">
+              Discover the exquisite artistry of our handcrafted products,
+              meticulously crafted with love and care by skilled artisans. Each
+              piece is a unique masterpiece, showcasing intricate details and
+              traditional techniques passed down through generations.
+            </div>
+            <div class="add-to-cart-container">
+              <button class="add-to-cart">
+                <svg
+                  class="add-to-cart-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      opacity="0.5"
+                      d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                    <path
+                      d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                    ></path>
+                  </g>
+                </svg>
+
+                <span>Add to cart</span>
+              </button>
+            </div>
+            <h2 class="product-title">
+              Handicraft title Lorem ipsum dolo elit. Itaque, sapiente!
+            </h2>
+
+            <p class="product-price">₹ 2345</p>
+            <div class="product-rating">
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-icon">&#9733;</span>
+              <span class="rating-count">(233 reviews)</span>
+            </div>
+            <div class="product-image-container">
+              <img
+                src="../images/marble-plate.webp"
+                alt=""
+                class="product-image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <a href="#" class="arrow">&#8249;</a>
+        <ul>
+          <li><a href="#" class="active">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+        </ul>
+        <a href="#" class="arrow">&#8250;</a>
+      </div>
     </div>
-  </footer>
-</div>
+
+    <section class="footer">
+      <div class="footer-container">
+        <div class="contact">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>
+              <img
+                width="16"
+                height="16"
+                class="footer-icon"
+                src="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/cell-phone.png"
+                data-lazy="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/cell-phone.png"
+              />
+              <p class="f-a-u">+91 8667078569</p>
+            </li>
+            <li>
+              <img
+                width="16"
+                height="16"
+                class="footer-icon"
+                src="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/email.png"
+                data-lazy="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/email.png"
+              />
+              <p class="f-a-u">editor@sevvey.com</p>
+            </li>
+            <li>
+              <img
+                width="16"
+                height="16"
+                class="footer-icon"
+                src="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/pin.png"
+                data-lazy="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/pin.png"
+              />
+              <p class="f-a-u w-175">
+                Rajiv Nagar, Kovilpatti, Thoothukudi-628501
+              </p>
+            </li>
+            <li>
+              <img
+                width="16"
+                height="16"
+                class="footer-icon"
+                src="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/clock.png"
+                data-lazy="https://static-src-files.s3.ap-south-1.amazonaws.com/app_images/clock.png"
+              />
+              <p class="f-a-u">
+                9:00AM - 6:00PM,<br />
+                Mon-Sun
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="quick-link">
+          <h4>Quick Link</h4>
+          <ul class="list-inline">
+            <li>
+              <a href="/privacy-policy">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+            </li>
+            <li>
+              <a href="/correction-policy">Correction Policy</a>
+            </li>
+            <li>
+              <a href="/fact-check-policy">Fact Check Policy</a>
+            </li>
+            <li>
+              <a href="/ethics-policy">Ethics Policy</a>
+            </li>
+            <li>
+              <a href="/sitemap.xml">Sitemap</a>
+            </li>
+            <li>
+              <a href="/disclaimer">Disclaimer</a>
+            </li>
+            <li>
+              <a href="/contact-us">Contact Us</a>
+            </li>
+            <li>
+              <a href="/editorial-team-information"
+                >Editorial team information</a
+              >
+            </li>
+            <li>
+              <a href="/ownership-funding">Ownership and Funding Information</a>
+            </li>
+            <li>
+              <a href="/advertise">Advertising</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="copyright">
+      <p>
+        © 2022 Uthraa All Rights Reserved. The "Sevvey" word mark and logo are
+        owned by Uthraa
+      </p>
+    </section>
+    <section class="mobile">
+      <div id="add-to-home" class="hidden-md hidden-lg show-home-screen">
+        <div class="add-to-home-content">
+          <a ng-click="install_app()" href="">
+            <img
+              width="24"
+              height="24"
+              src="https://www.sevvey.com/angular_files/images/icons/touch-24.png"
+            />
+            <p>Add to home screen</p>
+          </a>
+
+          <span onclick="close_add_to_home()">x</span>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="row mobile footer">
+        <div class="col-md-12 mobile-footer">
+          <div class="m-footer">
+            <a href="/news">
+              <svg
+                width="20"
+                height="19"
+                viewBox="0 0 20 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.5645 9.51855L10.4546 0.185547C10.4041 0.123698 10.341 0.0773112 10.2652 0.0463867C10.1895 0.0154622 10.1074 0 10.019 0C9.85488 0 9.70967 0.061849 9.58341 0.185547L0.435684 9.51855C0.359927 9.60514 0.309422 9.69792 0.284169 9.79688C0.258916 9.89583 0.262073 9.99788 0.293639 10.103C0.325204 10.2082 0.378866 10.2979 0.454624 10.3721C0.517755 10.4215 0.587199 10.4618 0.662957 10.4927C0.738714 10.5236 0.814472 10.536 0.89023 10.5298C0.965987 10.5236 1.04174 10.505 1.1175 10.4741C1.19326 10.4432 1.25639 10.403 1.3069 10.3535L2.14023 9.51855V18.4062C2.14023 18.5671 2.19705 18.7062 2.31068 18.8237C2.42432 18.9412 2.56952 19 2.74629 19H6.96977C7.02028 19 7.06763 18.9938 7.11182 18.9814C7.15601 18.9691 7.19705 18.9536 7.23493 18.9351C7.2728 18.9165 7.31068 18.8918 7.34856 18.8608C7.38644 18.8299 7.41801 18.799 7.44326 18.7681C7.46851 18.7371 7.49061 18.7031 7.50955 18.666C7.52849 18.6289 7.54427 18.5856 7.5569 18.5361C7.56952 18.4867 7.57584 18.4434 7.57584 18.4062L7.59477 12.4688H12.4243V18.4062C12.4243 18.5671 12.4843 18.7062 12.6042 18.8237C12.7242 18.9412 12.8662 19 13.0304 19H17.2728C17.4369 19 17.579 18.9412 17.6989 18.8237C17.8189 18.7062 17.8789 18.5671 17.8789 18.4062V9.51855L18.6933 10.3535C18.8069 10.4772 18.9521 10.5391 19.1289 10.5391C19.293 10.5391 19.4319 10.4834 19.5455 10.3721C19.6592 10.2484 19.7191 10.1061 19.7255 9.94531C19.7318 9.7845 19.6781 9.64225 19.5645 9.51855ZM16.6667 8.44238V17.8125H13.6364V11.875C13.6364 11.7142 13.5765 11.575 13.4565 11.4575C13.3366 11.34 13.1945 11.2812 13.0304 11.2812H6.98871C6.82457 11.2812 6.68253 11.34 6.56258 11.4575C6.44263 11.575 6.38265 11.7142 6.38265 11.875L6.36371 17.8125H3.35235V8.44238C3.35235 8.3929 3.34604 8.34342 3.33341 8.29395L10.019 1.46582L16.6857 8.29395C16.6731 8.34342 16.6667 8.3929 16.6667 8.44238Z"
+                  fill="black"
+                ></path>
+              </svg>
+              <h4>HOME</h4>
+            </a>
+          </div>
+          <div class="m-footer">
+            <input type="search" class="search" id="searchID" />
+            <a href="#search" onclick="showSearch()">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.75 16.25C12.8921 16.25 16.25 12.8921 16.25 8.75C16.25 4.60786 12.8921 1.25 8.75 1.25C4.60786 1.25 1.25 4.60786 1.25 8.75C1.25 12.8921 4.60786 16.25 8.75 16.25Z"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M14.375 14.375L18.75 18.75"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+
+              <h4>SEARCH</h4>
+            </a>
+          </div>
+          <div class="m-footer">
+            <a
+              data-toggle="modal"
+              ng-href="{{ user_data.profile_url }}"
+              id="{{ user_data.dom_id }}"
+              ng-click="account_click()"
+            >
+              <svg
+                width="19"
+                height="19"
+                viewBox="0 0 19 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.89587 10.9166C14.9008 10.9166 18.9584 12.8101 18.9584 15.1458V18.1666H0.833374V15.1458C0.833374 12.8101 4.89096 10.9166 9.89587 10.9166ZM17.75 15.1458C17.75 13.4783 14.2338 12.125 9.89587 12.125C5.55796 12.125 2.04171 13.4783 2.04171 15.1458V16.9583H17.75V15.1458ZM9.89587 0.041626C11.0175 0.041626 12.0932 0.487198 12.8863 1.28032C13.6795 2.07344 14.125 3.14915 14.125 4.27079C14.125 5.39244 13.6795 6.46814 12.8863 7.26127C12.0932 8.05439 11.0175 8.49996 9.89587 8.49996C8.77423 8.49996 7.69852 8.05439 6.9054 7.26127C6.11228 6.46814 5.66671 5.39244 5.66671 4.27079C5.66671 3.14915 6.11228 2.07344 6.9054 1.28032C7.69852 0.487198 8.77423 0.041626 9.89587 0.041626ZM9.89587 1.24996C9.0947 1.24996 8.32634 1.56822 7.75982 2.13474C7.19331 2.70126 6.87504 3.46962 6.87504 4.27079C6.87504 5.07197 7.19331 5.84033 7.75982 6.40684C8.32634 6.97336 9.0947 7.29163 9.89587 7.29163C10.697 7.29163 11.4654 6.97336 12.0319 6.40684C12.5984 5.84033 12.9167 5.07197 12.9167 4.27079C12.9167 3.46962 12.5984 2.70126 12.0319 2.13474C11.4654 1.56822 10.697 1.24996 9.89587 1.24996Z"
+                  fill="black"
+                ></path>
+              </svg>
+              <h4>ACCOUNT</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const productCards = document.querySelectorAll(".product-card");
+      // Loop through each product card and apply event listeners
+      productCards.forEach((productCard) => {
+        const addToCartButton = productCard.querySelector(
+          ".add-to-cart-container"
+        );
+        const description = productCard.querySelector(".short-description");
+        const textSpan = addToCartButton.querySelector("span");
+
+        textSpan.style.opacity = 0;
+
+        productCard.addEventListener("mouseenter", () => {
+          addToCartButton.classList.add("center");
+          textSpan.style.opacity = 1;
+          description.style.opacity = 1;
+          description.style.top = "10px";
+        });
+
+        productCard.addEventListener("mouseleave", () => {
+          addToCartButton.classList.remove("center");
+          textSpan.style.opacity = 0;
+          description.style.opacity = 0;
+          description.style.top = "20px";
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const cart = document.querySelector(".cart");
+
+        // Event delegation to apply the effect to each product card
+        document.addEventListener("click", function (event) {
+          const addToCartBtn = event.target.closest(".add-to-cart");
+          if (addToCartBtn) {
+            const productCard = addToCartBtn.closest(".product-card");
+            const productImage = productCard.querySelector(".product-image");
+
+            // Get the position of the product image
+            const productImageRect = productImage.getBoundingClientRect();
+            const productImageX =
+              productImageRect.left + productImageRect.width / 2;
+            const productImageY =
+              productImageRect.top + productImageRect.height / 2;
+
+            // Get the position of the cart
+            const cartRect = cart.getBoundingClientRect();
+            const cartX = cartRect.left + cartRect.width / 2;
+            const cartY = cartRect.top + cartRect.height / 2;
+
+            // Create a smaller flying image element
+            const flyingImage = productImage.cloneNode(true);
+            const scaleRatio = 0.5; // Adjust this value to set the size of the flying image
+            flyingImage.style.width = `${
+              productImageRect.width * scaleRatio
+            }px`;
+            flyingImage.style.height = `${
+              productImageRect.height * scaleRatio
+            }px`;
+            flyingImage.style.position = "fixed";
+            flyingImage.style.left = `${
+              productImageX - productImageRect.width / 4
+            }px`; // Adjust position to center the image
+            flyingImage.style.top = `${
+              productImageY - productImageRect.height / 4
+            }px`; // Adjust position to center the image
+            flyingImage.style.zIndex = "999"; // Set a higher z-index to make the flying image appear above other elements
+            document.body.appendChild(flyingImage);
+
+            // Animation to move the image to the cart and shrink as it enters
+            animate(
+              flyingImage,
+              cartX - productImageX,
+              cartY - productImageY,
+              1000,
+              scaleRatio
+            );
+
+            // Remove the flying image after the animation
+            setTimeout(() => {
+              flyingImage.remove();
+            }, 1500); // Wait for the animation to finish (1000 + 500 milliseconds)
+          }
+        });
+
+        // JavaScript animation function for flying to the cart and shrinking
+        function animate(
+          element,
+          translateX,
+          translateY,
+          duration,
+          scaleRatio
+        ) {
+          const startTime = performance.now();
+          const initialOffsetX = window.pageXOffset; // Save initial horizontal scroll position
+          const initialOffsetY = window.pageYOffset; // Save initial vertical scroll position
+
+          function step(currentTime) {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const easeProgress = easeOutQuart(progress);
+            const scale = 1 + (scaleRatio - 1) * easeProgress;
+            const offsetX = window.pageXOffset - initialOffsetX; // Calculate horizontal scroll position change
+            const offsetY = window.pageYOffset - initialOffsetY; // Calculate vertical scroll position change
+            element.style.transform = `translate(${
+              translateX * easeProgress + offsetX
+            }px, ${translateY * easeProgress + offsetY}px) scale(${scale})`;
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            }
+          }
+
+          requestAnimationFrame(step);
+        }
+
+        // Easing function
+        function easeOutQuart(t) {
+          return 1 - --t * t * t * t;
+        }
+      });
+    </script>
+  </body>
+</html>
